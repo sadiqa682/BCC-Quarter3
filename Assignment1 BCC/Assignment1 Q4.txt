@@ -1,0 +1,35 @@
+// Q4 Create 3 Service Stations for each vehicle type, with the same
+//function “vehicleService that takes the address of the deployed
+//contracts of step 3, in the “Vehicle” variable to call the service
+//function
+pragma solidity ^0.8.0;
+contract ParentVehicle {
+    
+    function serviceStationA() public pure virtual returns(string memory){
+        return ("This Station is for Honda");
+    }
+    function serviceStationB() public pure virtual returns(string memory){
+        return ("This Station is for Hino");
+    }
+    function serviceStationC() public pure virtual returns(string memory){
+        return ("This Station is for Yamaha");
+    }
+}
+
+contract cars is ParentVehicle {
+    function serviceStationA() public pure override returns(string memory){
+        return ("The car is being serviced");
+    }
+}
+
+contract mehran is  ParentVehicle {
+    function serviceStationB() public pure override returns(string memory){
+        return(" Hino Trucks serviced");
+    }
+}
+    
+contract MotorCycles is  ParentVehicle {
+    function serviceStationC() public pure override returns(string memory){
+        return(" Honda,Yamaha all being serviced");
+    }
+}

@@ -1,0 +1,43 @@
+//pragma solidity ^0.8.0;
+//Q3
+//Then create smart contracts for “Alto Mehran, “ Hino, Yamaha,
+//that may inherit the relevant smart contract(s) as in step 2.
+pragma solidity ^0.8.0;
+contract ParentVehicle {
+    function start() public pure returns(string memory){
+        return ("The Vehicle has just Started");
+    }
+    function accelerate() public pure returns(string memory){
+        return ("The Vehicle has just Accelerated");
+    }
+    function stop() public pure returns(string memory){
+        return ("The Vehicle has just Stopped");
+    }
+    function service() public pure virtual returns(string memory){
+        return ("The Vehicle is being serviced");
+    }
+}
+
+contract cars is ParentVehicle {
+    function service() public pure override returns(string memory){
+        return ("The car is being serviced");
+    }
+}
+
+contract mehran is  ParentVehicle {
+    function service() public pure override returns(string memory){
+        return(" Mehran serviced");
+    }
+}
+
+contract Honda is  ParentVehicle {
+    function service() public pure override returns(string memory){
+        return(" Honda serviced");
+    }
+}
+
+contract Hino is  ParentVehicle {
+    function service() public pure override returns(string memory){
+        return(" Hino serviced");
+    }
+}

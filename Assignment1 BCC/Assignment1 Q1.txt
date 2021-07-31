@@ -1,0 +1,31 @@
+// Q1  Create a first "ParentVehicle" contract that includes the following functions
+//start - returns String message” The Vehicle has just Started”
+//accelerate - returns String message” The Vehicle has just Accelerated”
+//stop -- returns String message” The Vehicle has just Stopped”
+//service- returns String message” The Vehicle is being serviced”
+
+contract vehcile{
+   // uint start;
+    event logString(string);
+    
+    constructor() public{
+     emit logString("in vehcile constructor");
+    }
+    
+    function start() public {
+        emit logString("the vehicle has just started");
+        
+    }
+    function accelerate() public{
+        emit logString("the vehicle has just Accelerated");
+    }
+    function stop() public{
+        emit logString("the vehicle has just stopped");
+    }
+    
+    function service() public{
+        emit logString("the vehicle is being serviced");
+    }
+}
+    
+    

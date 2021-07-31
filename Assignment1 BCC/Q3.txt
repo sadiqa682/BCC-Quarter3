@@ -1,0 +1,33 @@
+contract vehcile{
+    constructor() public{
+        
+    }
+    
+    string a = "Truck,Cars and Motorcycles are all vehciles";
+    string b = " My car is servised";
+    string c = "My Motor cycle is serviced";
+    event logString(string);
+    
+    
+    function A()  virtual public  {
+                 emit logString(a);
+        
+    }
+    function B()  virtual public  {
+                 emit logString(b);
+        
+    }
+    function C()  virtual public  {
+                 emit logString(c);
+        
+    }
+}
+contract Cars is vehcile{
+      constructor() public {
+      
+    function B()  public override  returns (string memory){
+           string memory b  = " Toyota and is serviced";   
+           emit logString(b); 
+    }
+}
+}
