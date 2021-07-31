@@ -1,0 +1,75 @@
+contract Cryptobank {
+    uint256 bankTotal;
+    address payable owner;
+    bytes32 accNames;
+    event bankNotice(string);
+    event bankTitle(string);
+    event Address(address);
+    uint256 amount;
+    uint count;
+    event Loguint(uint);
+    mapping(address => uint) private accounts;
+    mapping(address => uint256) public balanceOf; 
+    
+    modifier isOwner(address _owner){
+        if(_owner == owner){
+            _;
+        }
+    }
+    constructor() payable{
+        require (msg.value >= 10 ether, "owner must sent 50 ether to start a bank");
+        owner = payable(msg.sender);
+        bankTotal=msg.value;
+        emit bankNotice("The bank started with paid capital of 10 ether");
+        count = 0;
+    }
+    
+    //2.  The owner can closed the bank
+    //function closeBank() payable public isOwner(msg.sender) {
+        
+       // selfdestruct (owner);
+        //emit bankNotice("the bank is closed");
+    //}
+    //3. Anyone can open an account in the bank for Account opening they need to deposit ether with address
+    
+        function openAcc() public payable{
+      require(accounts[msg.sender] == 0,"already exists");  
+      require(msg.value > 0 && msg.sender != address(0),"value should not be 0");
+      accounts[msg.sender]=msg.value;
+      if(count <=4){
+          payable (msg.sender).transfer(1 ether);
+         
+          count++;
+      }
+    }
+    //4 Anyone can deposit
+    function deposit(uint256 amount) public payable {
+        require(msg.value == amount);
+        balanceOf[msg.sender] += amount;     // adjust the account's balance
+    }
+    //5 Anyone can deposit in the bank
+    function depositeAmount(address _addr, uint _amount) public payable{
+        accounts[msg.sender]=msg.value;
+    }
+    
+    //6 only valid account holders can withdraw
+    function withDraw(uint amount) public  payable{
+        require(msg.value > 0 && msg.sender != address(0),"invalid address");
+        require(amount < accounts[msg.sender],"invalid address");
+        payable(msg.sender).transfer(amount);
+        accounts[msg.sender] -= amount;
+    }
+    //7,8 First 5 accounts will get a bonus of 1 ether in bonus
+    function inquirebalance() public payable returns(uint){
+     require( msg.sender != address(0)&& accounts[msg.sender]>0,"invalid address");
+     payable(msg.sender).transfer(accounts[msg.sender]);
+     delete accounts[msg.sender];
+    }
+    //9 bank total balance
+    function totalBalance() public view returns(uint){
+        require(msg.sender == owner," only owner can view");
+        return address(this).balance;
+    }
+}
+    
+ 
